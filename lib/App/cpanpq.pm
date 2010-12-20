@@ -29,6 +29,7 @@ sub run {
   my $dir = _get_dir();
   mkpath $dir unless -d $dir;
   $opts{_dir} = $dir;
+  delete $opts{cb};
   my $self = bless \%opts, $package;
   $self->{skiplist} = File::Spec->catfile( $dir, 'skiplist' );
   if ( -e $self->{skiplist} ) {
@@ -116,7 +117,7 @@ sub update {
     $installed{ $module } = defined $href->{version} ? $href->{version} : 'undef';
   }
 
-  $self->{cb} = _backend();
+  $self->{cb} ||= _backend();
 
   my $mirrors = $self->{cb}->configure_object()->get_conf('hosts');
 
@@ -340,12 +341,34 @@ sub _all_installed {
 
 qq[Hello, darkness, my old friend];
 
+=begin Pod::Coverage
+
+  install
+  uninstall
+  update
+
+=end Pod::Coverage
+
 =pod
 
 =head1 SYNOPSIS
 
+  use App::cpanpq;
+
+  App::cpanpq->run();
+
 =head1 DESCRIPTION
 
-=head1 STUFF
+App::cpanpq provides the guts of the L<cpanpq> command.
+
+=head1 CONSTRUCTOR
+
+=over
+
+=item C<run>
+
+Executes the L<cpanpq> command.
+
+=back
 
 =cut
