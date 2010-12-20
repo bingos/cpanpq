@@ -1,0 +1,36 @@
+#!perl
+
+package cpanpq;
+
+# ABSTRACT: CPAN tool based on CPANPLUS
+
+use strict;
+use warnings;
+use App::cpanpq;
+
+App::cpanpq->run();
+
+=pod
+
+=head1 SYNOPSIS
+
+  # Install POE
+
+  $ cpanpq POE
+
+  # Uninstall Acme::Bleach
+
+  $ cpanpq --uninstall Acme::Bleach
+
+  # Update out of date modules
+
+  $ cpanpq --update
+
+  # Update out of date modules without any prompting
+
+  $ cpanpq --update --all
+
+=head1 DESCRIPTION
+
+
+=cut
