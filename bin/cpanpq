@@ -33,8 +33,8 @@ App::cpanpq->run();
 =head1 DESCRIPTION
 
 cpanpq is an easy to use frontend built on top of L<CPANPLUS>, that facilitates easy
-integration of L<CPANPLUS> and C<CPANIDX>. It provides ways to install, uninstall and
-update modules on your system. By using C<CPANIDX> as an indexing mechanism memory 
+integration of L<CPANPLUS> and C<CPANMetaDB> / C<CPANIDX>. It provides ways to install, uninstall and
+update modules on your system. By using C<CPANMetaDB> or C<CPANIDX> as an indexing mechanism memory 
 requirements are kept low.
 
 =cut

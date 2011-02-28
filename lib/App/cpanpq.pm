@@ -204,7 +204,12 @@ sub _backend {
   my $conf = CPANPLUS::Configure->new();
   $conf->set_conf( no_update => '1' );
   # Choose between CPANIDX and CPANMetaDB
-  $conf->set_conf( source_engine => 'CPANPLUS::Internals::Source::CPANIDX' );
+  if ( $ENV{PERL5_CPANIDX_URL} ) {
+    $conf->set_conf( source_engine => 'CPANPLUS::Internals::Source::CPANIDX' );
+  }
+  else {
+    $conf->set_conf( source_engine => 'CPANPLUS::Internals::Source::CPANMetaDB' );
+  }
   if ( check_install( module => 'CPANPLUS::Dist::YACSmoke' ) ) {
     $conf->set_conf( dist_type => 'CPANPLUS::Dist::YACSmoke' );
     $conf->set_conf( 'prereqs' => 2 );
@@ -213,6 +218,8 @@ sub _backend {
     $conf->set_conf( 'prereqs' => 1 );
   }
   $conf->set_conf( 'verbose' => 1 );
+  $conf->set_conf( 'enable_custom_sources' => 0 );
+  $conf->set_conf( 'write_install_logs' => 0 );
   my $cb = CPANPLUS::Backend->new($conf);
   return $cb;
 }
